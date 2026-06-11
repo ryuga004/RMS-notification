@@ -35,6 +35,9 @@ public class RabbitMqConfig {
     @Value("${mq.ssl:false}")
     private boolean useSsl;
 
+    @Value("${mq.virtual-host:/}")
+    private String virtualHost;
+
     @Bean
     public ConnectionFactory connectionFactory() throws Exception {
         log.info("Initializing RabbitMQ connection factory");
@@ -54,6 +57,7 @@ public class RabbitMqConfig {
         factoryBean.setPort(port);
         factoryBean.setUsername(username);
         factoryBean.setPassword(password);
+        factoryBean.setVirtualHost(virtualHost);
         factoryBean.setUseSSL(useSsl);
         factoryBean.setConnectionTimeout(10_000);
         factoryBean.setRequestedHeartbeat(10);
